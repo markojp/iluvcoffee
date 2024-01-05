@@ -12,9 +12,8 @@ export class CoffeesService {
     private readonly coffeeRepository: Repository<Coffee>,
   ) {}
 
-  async findAll(): Promise<Coffee[]> {
-    const coffees = await this.coffeeRepository.find();
-    return coffees;
+  findAll(): Promise<Coffee[]> {
+    return this.coffeeRepository.find();
   }
 
   async findOne(id: string) {
@@ -42,7 +41,7 @@ export class CoffeesService {
   }
 
   async remove(id: string) {
-    const coffee = await this.coffeeRepository.findOneBy({ id: +id });
+    const coffee = await this.findOne(id);
     return this.coffeeRepository.remove(coffee);
   }
 }
